@@ -19,15 +19,7 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-around",
-        alignItems: "center",
         marginBottom: 15
-    },
-    upperLeftRow: {
-      width: '50%',
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center"
     },
     coinSymbol: {
         marginTop: 10,
@@ -72,6 +64,13 @@ const styles = StyleSheet.create({
         color: "#DD2C00",
         fontWeight: "bold",
         marginLeft: 5
+    },
+    priceContainer: {
+      minWidth: '45%',
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center"
     }
 })
 
@@ -80,49 +79,41 @@ const {
     image,
     moneySymbol,
     upperRow,
-    upperLeftRow,
     coinSymbol,
     coinName,
     coinPrice,
     statisticsContainer,
     seperator,
     percentChangePlus,
-    percentChangeMinus
-} = styles;
+    percentChangeMinus,
+    priceContainer
+}= styles;
 
-const CoinCard = ({ symbol, coin_name, price_usd, percent_change_24h, percent_change_7d })=> {
-
-
+const CoinCard= ({ symbol, coin_name, price_usd, percent_change_24h, percent_change_7d })=> {
     return (
         <View style={container}>
-
             <View style={upperRow}>
-                <View style={upperLeftRow}>
-                  <Image
-                      style={styles.image}
-                      source={{ uri: images[symbol] }}
-                  />
-                  <Text style={coinSymbol}>{symbol}</Text>
-                  <Text style={seperator}>|</Text>
-                  <Text style={coinName}>{coin_name}</Text>
-                </View>
-
-                <View style={upperLeftRow}>
+                <Image
+                    style={styles.image}
+                    source={{ uri: images[symbol] }}
+                />
+                <Text style={coinSymbol}>{symbol}</Text>
+                <Text style={seperator}>|</Text>
+                <Text style={coinName}>{coin_name}</Text>
+                <View style={priceContainer}>
                   <Text style={moneySymbol}> $
-                    <Text style={coinPrice}>{price_usd}</Text>
+                      <Text style={coinPrice}>{price_usd}</Text>
                   </Text>
                 </View>
             </View>
 
             <View style={statisticsContainer}>
-
                 <Text>24h:
-                     <Text style={percent_change_24h < 0 ? percentChangeMinus : percentChangePlus }> {percent_change_24h} % </Text>
+                     <Text style={percent_change_24h<0 ? percentChangeMinus : percentChangePlus }> {percent_change_24h} % </Text>
                 </Text>
                 <Text>7d:
-                    <Text style={percent_change_7d < 0 ? percentChangeMinus : percentChangePlus }> {percent_change_7d} % </Text>
+                    <Text style={percent_change_7d<0 ? percentChangeMinus : percentChangePlus }> {percent_change_7d} % </Text>
                 </Text>
-
             </View>
 
         </View>
